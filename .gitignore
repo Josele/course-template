@@ -10,3 +10,8 @@ dist/
 pids
 *.pid
 *.seed
+
+# editor files #
+*~
+\#*\#
+.\#*
