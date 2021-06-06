@@ -1,0 +1,12 @@
+
+# NodeJS specific #
+node_modules/
+dist/
+
+# Logs #
+*.log
+
+# Runtime data #
+pids
+*.pid
+*.seed
