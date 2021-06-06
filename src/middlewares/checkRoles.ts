@@ -10,6 +10,29 @@ import { JwtService } from '@shared/JwtService';
 const jwtService = new JwtService();
 const { UNAUTHORIZED } = StatusCodes;
 
+// Middleware to verify if user is has an account
+export const userMW = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        // Get json-web-token
+        const jwt = req.signedCookies[cookieProps.key];
+        if (!jwt) {
+            throw Error('JWT not present in signed cookie.');
+        }
+        // Make sure user role is an admin
+        const clientData = await jwtService.decodeJwt(jwt);
+        if (clientData.role === UserRoles.Standard
+			|| clientData.role === UserRoles.Admin) {
+				res.sessionUser = clientData;
+				next();
+			} else {
+            throw Error('JWT not present in signed cookie.');
+        }
+    } catch (err) {
+        return res.status(UNAUTHORIZED).json({
+            error: err.message,
+        });
+    }
+};
 
 // Middleware to verify if user is an admin
 export const adminMW = async (req: Request, res: Response, next: NextFunction) => {

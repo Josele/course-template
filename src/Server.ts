@@ -57,10 +57,12 @@ app.set('views', viewsDir);
 const staticDir = path.join(__dirname, 'public');
 app.use(express.static(staticDir));
 
+// default resource
 app.get('/', (req: Request, res: Response) => {
     res.sendFile('login.html', {root: viewsDir});
 });
 
+// all users resource
 app.get('/users', (req: Request, res: Response) => {
     const jwt = req.signedCookies[cookieProps.key];
     if (!jwt) {
@@ -70,7 +72,15 @@ app.get('/users', (req: Request, res: Response) => {
     }
 });
 
-
+// user profile resource
+app.get('/profile', (req: Request, res: Response) => {
+    const jwt = req.signedCookies[cookieProps.key];
+    if (!jwt) {
+        res.redirect('/');
+    } else {
+        res.sendFile('profile.html', {root: viewsDir});
+    }
+});
 
 /************************************************************************************
  *                              Export Server

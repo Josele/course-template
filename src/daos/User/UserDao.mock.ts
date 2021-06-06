@@ -18,6 +18,15 @@ class UserDao extends MockDaoMock implements IUserDao {
         return null;
     }
 
+    public async getOneById(id: number): Promise<IUser | null> {
+        const db = await super.openDb();
+        for (const user of db.users) {
+            if (user.id === id) {
+                return user;
+            }
+        }
+        return null;
+    }
 
     public async getAll(): Promise<IUser[]> {
         const db = await super.openDb();
