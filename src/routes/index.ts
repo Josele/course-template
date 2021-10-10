@@ -1,10 +1,13 @@
 import { Router } from 'express';
-import { userMW , adminMW } from '../middlewares/checkRoles';
+import { checkJwt , adminMW, checkRole } from '../middlewares/checkRoles';
 import AuthController  from '../controllers/AuthController';
 import UserController  from '../controllers/UserController';
 import ProfileController  from '../controllers/ProfileController';
+import { UserRoles } from '@entities/User';
 
 
+// Building routs 
+// Here we build the routes but we don't accept until registered
 // Auth router
 const authRouter = Router();
 authRouter.post('/login', AuthController.login);
@@ -22,10 +25,12 @@ userRouter.delete('/delete/:id', UserController.deleteOneUser);
 const profileRouter = Router();
 profileRouter.get('/all', ProfileController.getUser);
 
+// Registering routes
+// Here we register routes and assign middleware to them
 // Export the base-router
 const baseRouter = Router();
 baseRouter.use('/auth', authRouter);
 // routes that require login
-baseRouter.use('/users', adminMW, userRouter);
-baseRouter.use('/profile', userMW, profileRouter);
+baseRouter.use('/users', [checkJwt, checkRole(UserRoles.Admin)], userRouter); //we require admin rights too
+baseRouter.use('/profile', checkJwt, profileRouter);
 export default baseRouter;

@@ -72,6 +72,8 @@ document.addEventListener('click', function (event) {
         deleteUser(ele);
     } else if (ele.matches('#logout-btn')) {
         logoutUser();
+    } else if (ele.matches('#admin-btn')) {
+        goAdminPanel();
     }
 }, false)
 
@@ -79,11 +81,14 @@ document.addEventListener('click', function (event) {
 function addUser() {
     var nameInput = document.getElementById('name-input');
     var emailInput = document.getElementById('email-input');
+    var pwdInput = document.getElementById('password-input');
+    console.log(emailInput)
     var data = {
         user: {
             name: nameInput.value,
             email: emailInput.value
         },
+	    password : pwdInput.value
     };
     Http.Post('/api/users/add', data)
         .then(() => {
@@ -144,4 +149,13 @@ function logoutUser() {
         .then(() => {
             window.location.href = '/';
         })
+}
+
+
+/******************************************************************************
+ *                        Travel 
+ ******************************************************************************/
+
+function goAdminPanel() {
+    window.location.href = '/users';
 }

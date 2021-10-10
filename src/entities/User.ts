@@ -1,7 +1,6 @@
 export enum UserRoles {
     Standard,
     Admin,
-	Guest,
 }
 
 export interface IUser {

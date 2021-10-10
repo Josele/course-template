@@ -11,7 +11,7 @@ const jwtService = new JwtService();
 const { UNAUTHORIZED } = StatusCodes;
 
 // Middleware to verify if user is has an account
-export const userMW = async (req: Request, res: Response, next: NextFunction) => {
+export const checkJwt = async (req: Request, res: Response, next: NextFunction) => {
     try {
         // Get json-web-token
         const jwt = req.signedCookies[cookieProps.key];
@@ -32,6 +32,36 @@ export const userMW = async (req: Request, res: Response, next: NextFunction) =>
             error: err.message,
         });
     }
+};
+
+// Middleware to verify if role
+export const checkRole = (roles: UserRoles) => {
+	return async (req: Request, res: Response, next: NextFunction) => {
+		//Get the user ID from previous midleware
+		const id = res.sessionUser.id;
+
+		//Get user role from the database
+		//const userRepository = getRepository(User);
+		//let user: User;
+		//try {
+		//	user = await userRepository.findOneOrFail(id);
+		//} catch (id) {
+		//	res.status(401).send();
+		//}
+
+		//Check if array of authorized roles includes the user's role
+
+		if (res.sessionUser.role === UserRoles.Admin)
+		{
+			next();
+		}else
+		{
+			return res.status(UNAUTHORIZED).json({
+				error: 'UNAUTHORIZED',
+			});
+		}
+	
+	};
 };
 
 // Middleware to verify if user is an admin
