@@ -59,6 +59,14 @@ app.use(express.static(staticDir));
 
 // default resource
 app.get('/', (req: Request, res: Response) => {
+    res.sendFile('index.html', {root: viewsDir});
+});
+app.get('/index', (req: Request, res: Response) => {
+    res.sendFile('index.html', {root: viewsDir});
+});
+
+// login resource
+app.get('/login', (req: Request, res: Response) => {
     res.sendFile('login.html', {root: viewsDir});
 });
 
