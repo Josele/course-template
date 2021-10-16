@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import UserDao from '@daos/User/UserDao.mock';
 import { paramMissingError } from '@shared/constants';
+import { pwdSaltRounds } from '@shared/constants';
 import { UserRoles } from '@entities/User';
 
 const userDao = new UserDao();
@@ -39,7 +40,7 @@ class UserController{
                 error: paramMissingError,
             });
         }
-        const salt = await bcrypt.genSalt(10);
+        const salt = await bcrypt.genSalt(pwdSaltRounds);
         user.pwdHash = await bcrypt.hash(req.body.password, salt);
         user.role = UserRoles.Standard;         
         await userDao.add(user);
