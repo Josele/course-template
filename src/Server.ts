@@ -10,8 +10,9 @@ import 'express-async-errors';
 import BaseRouter from './routes';
 import logger from '@shared/Logger';
 import { cookieProps } from '@shared/constants';
+import { fillRightMenu, fillMainMenu } from './middlewares/templateEngFiller';
 
-const app = express();
+const app = express(); 
 const { BAD_REQUEST } = StatusCodes;
 
 
@@ -52,17 +53,23 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
  *                              Serve front-end content
  ***********************************************************************************/
 
+// view engine setup
 const viewsDir = path.join(__dirname, 'views');
 app.set('views', viewsDir);
+app.set('view engine', 'ejs');
 const staticDir = path.join(__dirname, 'public');
 app.use(express.static(staticDir));
 
-// default resource
+// default resource 
+
+app.use('/',[fillRightMenu, fillMainMenu]); //Note that use applies to all routes with
+//that prefix
 app.get('/', (req: Request, res: Response) => {
-    res.sendFile('index.html', {root: viewsDir});
+	res.render('pages/index', {root: viewsDir});
 });
 app.get('/index', (req: Request, res: Response) => {
-    res.sendFile('index.html', {root: viewsDir});
+    res.redirect('/');
+	
 });
 
 // login resource

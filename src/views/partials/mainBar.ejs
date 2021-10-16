@@ -1,0 +1,12 @@
+
+   	  <% mainMenus.forEach(function(menu, idx, array){ %>
+		<% if (page.includes(menu.name)){ %>
+		<li>
+     	<a id="selected" href="<%= menu.link %>"><%= menu.name %></a>
+		</li>
+	    <% } else{ %>
+		<li>
+     	<a href="<%= menu.link %>"><%= menu.name %></a>
+		</li>
+		<% } %>	
+      <% }); %>

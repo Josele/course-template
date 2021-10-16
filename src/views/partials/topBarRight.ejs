@@ -1,0 +1,9 @@
+
+   	  <% topRightMenus.forEach(function(menu, idx, array){ %>
+		<% if (menu.class === ""){ %>
+     	<a href="<%= menu.link %>"><%= menu.name %></a>
+	    <% } else{ %>
+     	<a id="<%= menu.class %>" href="<%= menu.link %>"><%= menu.name %></a>
+		<% } %>	
+		<% if (idx !== array.length - 1){ %> | <% } %>
+      <% }); %>
