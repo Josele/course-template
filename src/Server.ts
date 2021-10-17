@@ -65,7 +65,7 @@ app.use(express.static(staticDir));
 app.use('/',[fillRightMenu, fillMainMenu]); //Note that use applies to all routes with
 //that prefix
 app.get('/', (req: Request, res: Response) => {
-	res.render('pages/index', {root: viewsDir});
+	res.render('partials/layout', {root: viewsDir, column2body: "../pages/index.html" });
 });
 app.get('/index', (req: Request, res: Response) => {
     res.redirect('/');
@@ -74,7 +74,8 @@ app.get('/index', (req: Request, res: Response) => {
 
 // login resource
 app.get('/login', (req: Request, res: Response) => {
-    res.sendFile('login.html', {root: viewsDir});
+	res.render('partials/layout', {root: viewsDir, column2body: "../pages/login.html" });
+//    res.sendFile('login.html', {root: viewsDir});
 });
 
 // all users resource
@@ -83,7 +84,7 @@ app.get('/users', (req: Request, res: Response) => {
     if (!jwt) {
         res.redirect('/');
     } else {
-        res.sendFile('users.html', {root: viewsDir});
+		res.render('partials/layout', {root: viewsDir, column2body: "../pages/users.html" });
     }
 });
 
@@ -93,7 +94,7 @@ app.get('/profile', (req: Request, res: Response) => {
     if (!jwt) {
         res.redirect('/');
     } else {
-        res.sendFile('profile.html', {root: viewsDir});
+		res.render('partials/layout', {root: viewsDir, column2body: "../pages/profile.html" });
     }
 });
 

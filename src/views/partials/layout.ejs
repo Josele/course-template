@@ -1,19 +1,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-	<%- include('../partials/head'); %>
+	<%- include('./head'); %>
 </head>
 <body>
 <div id="main">
-  <%- include('../partials/header.html'); %>
+  <%- include('./header.html'); %>
   <div id="content">
     <div id="column1">
-	  <%- include('../partials/sideBar.html'); %>
+	  <%- include('./sideBar.html') %>
     <div id="column2">
-	  <%- include('../partials/homeMainContainer.html'); %>
+	  <%- include(column2body) %>
     </div>
   </div>
-	<%- include('../partials/footer.html'); %>
+	<%- include('./footer.html'); %>
   <script src="scripts/http.js"></script>
   <script src="scripts/logout.js"></script>
 </body>
