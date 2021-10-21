@@ -82,7 +82,6 @@ function addUser() {
     var nameInput = document.getElementById('name-input');
     var emailInput = document.getElementById('email-input');
     var pwdInput = document.getElementById('password-input');
-    console.log(emailInput)
     var data = {
         user: {
             name: nameInput.value,

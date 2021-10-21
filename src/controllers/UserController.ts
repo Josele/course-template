@@ -23,6 +23,24 @@ class UserController{
 		return res.status(OK).json({users});
 	}
 
+	/**
+	 * Get my users.
+	 * 
+	 * @param req 
+	 * @param res 
+	 * @returns 
+	 */
+	static	getMyUser = async(req: Request, res: Response) => {
+		const id =  res.sessionUser.id;
+		const user = await userDao.getOneById(id);
+		if (!user) {
+			return res.status(BAD_REQUEST).json({
+				error: paramMissingError,
+			});
+		}
+	    return res.status(OK).json({user});
+    }
+
 
 
 /**

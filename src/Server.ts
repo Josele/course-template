@@ -43,14 +43,14 @@ app.use('/api', BaseRouter);
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     logger.err(err, true);
     return res.status(BAD_REQUEST).json({
-        error: err.message,
-    });
+		error: err.message,
+	});
 });
 
 
 
 /************************************************************************************
- *                              Serve front-end content
+ *								Serve front-end content
  ***********************************************************************************/
 
 // view engine setup
@@ -68,23 +68,23 @@ app.get('/', (req: Request, res: Response) => {
 	res.render('partials/layout', {root: viewsDir, column2body: "../pages/index.html" });
 });
 app.get('/index', (req: Request, res: Response) => {
-    res.redirect('/');
+	res.redirect('/');
 	
 });
 
 // login resource
 app.get('/login', (req: Request, res: Response) => {
 	res.render('partials/layout', {root: viewsDir, column2body: "../pages/login.html" });
-//    res.sendFile('login.html', {root: viewsDir});
+//	  res.sendFile('login.html', {root: viewsDir});
 });
 
 // all users resource
 app.get('/users', (req: Request, res: Response) => {
-    const jwt = req.signedCookies[cookieProps.key];
+	const jwt = req.signedCookies[cookieProps.key];
     if (!jwt) {
-        res.redirect('/');
+	    res.redirect('/');
     } else {
-		res.render('partials/layout', {root: viewsDir, column2body: "../pages/users.html" });
+        res.render('partials/layout', {root: viewsDir, column2body: "../pages/users.html" });
     }
 });
 
