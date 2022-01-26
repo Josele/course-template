@@ -36,7 +36,6 @@ export const fillMainMenu = async (req: Request, res: Response, next: NextFuncti
 	{
 		page=url;
 	}
-	console.log(url);
 	res.locals.page=page;
 	var mainMenus=[{name: 'home', link: "/", selected:""}];
 	if (!jwt)

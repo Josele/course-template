@@ -1,6 +1,6 @@
 import { IUser } from '@entities/User';
-
-
+const Sequelize = require("sequelize");
+const { models } = require("../../models/index");
 
 export interface IUserDao {
     getOne: (email: string) => Promise<IUser | null>;
@@ -17,8 +17,12 @@ class UserDao implements IUserDao {
      * @param email
      */
     public getOne(email: string): Promise<IUser | null> {
-        // TODO
-        return Promise.resolve(null);
+        const { user } = await models.User.find({
+            where: {
+                email: email
+            }
+        });
+        return Promise.resolve(user);
     }
 
 
@@ -26,8 +30,8 @@ class UserDao implements IUserDao {
      *
      */
     public getAll(): Promise<IUser[]> {
-         // TODO
-        return Promise.resolve([]);
+        const users = await models.User.findAll();
+        return Promise.resolve(users);
     }
 
 
