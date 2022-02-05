@@ -1,16 +1,17 @@
 {
   "name": "course-template",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "build": "./node_modules/.bin/ts-node build.ts",
     "lint": "eslint . --ext .ts",
     "start": "node -r module-alias/register ./dist --env=production",
     "start:dev": "nodemon",
-	"migrate": "sequelize db:migrate --url sqlite://$(pwd)/db.sqlite"
-	"seed": "sequelize db:seed:all --url sqlite://$(pwd)/db.sqlite"
-	"migrate_env": "sequelize db:migrate --url $DATABASE_URL"
-	"seed_env": "sequelize db:seed:all --url $DATABASE_URL"
-	"test": "nodemon --config ./spec/nodemon.json",
+    "migrate": "sequelize-cli db:migrate --url sqlite://$(pwd)/db.sqlite",
+    "seed": "sequelize-cli db:seed:all --url sqlite://$(pwd)/db.sqlite",
+    "migrate_env": "sequelize-cli db:migrate --url $DATABASE_URL",
+    "seed_env": "sequelize-cli db:seed:all --url $DATABASE_URL",
+    "test": "nodemon --config ./spec/nodemon.json",
+    "test_db": "./node_modules/.bin/ts-node --files  --project tsconfig.test.json ./src/db/tests/main.ts",
     "test:no-reloading": "./node_modules/.bin/ts-node --files -r tsconfig-paths/register ./spec"
   },
   "author": "Jose Luis Moragas",
@@ -86,7 +87,7 @@
     "morgan": "^1.10.0",
     "randomstring": "^1.2.1",
     "sequelize": "^6.7.0",
-    "sequelize-cli-typescript": "^3.2.0-c",
+    "sequelize-cli": "^6.4.1",
     "sqlite3": "^5.0.2"
   },
   "devDependencies": {
