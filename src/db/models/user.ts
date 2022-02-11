@@ -1,33 +1,14 @@
-import { IUser } from '@entities/User';
+import { IUserDao } from '@entities/User';
 
 import {
     Sequelize,
     DataTypes,
-    Model
 } from 'sequelize';
 
-export interface UserAttributes {
-    name: string;
-    role: number;
-    pwdHash: string;
-    email: string;
-
-}
-
-
-
-export interface UserModel extends Model{
-    id: number;
-    name: string;
-    email: string;
-    pwdHash: string;
-    role: number;
-    createdAt: string;
-    updatedAt: string;
-}
-
-export function user(sequelize: Sequelize, dataTypes: typeof DataTypes) {
-    return sequelize.define<UserModel>('Users', {
+// Defines the Users Table DB. It has taken the IUsersDao as model,
+// which extends sequelize model
+export function userModel(sequelize: Sequelize, dataTypes: typeof DataTypes) {
+    return sequelize.define<IUserDao>('Users', {
             id: {
                 type: dataTypes.INTEGER,
                 allowNull: false,
@@ -47,16 +28,16 @@ export function user(sequelize: Sequelize, dataTypes: typeof DataTypes) {
             },
             email: {type: dataTypes.STRING},
             pwdHash: {type: dataTypes.STRING},
-//            createdAt: {
-//                type: dataTypes.DATE,
-//                allowNull: false,
-//                defaultValue: dataTypes.NOW
-//            },
-//            updatedAt: {
-//                type: dataTypes.DATE,
-//                allowNull: false,
-//                defaultValue: dataTypes.NOW
-//           }
+            createdAt: {
+                type: dataTypes.DATE,
+                allowNull: false,
+                defaultValue: dataTypes.NOW
+            },
+            updatedAt: {
+                type: dataTypes.DATE,
+                allowNull: false,
+                defaultValue: dataTypes.NOW
+           }
     });
 
 

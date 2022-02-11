@@ -1,7 +1,7 @@
 {
   "development": {
     "database": "database_development",
-    "host": "db.sqlite",
+    "host": "./db/db.sqlite",
     "dialect": "sqlite"
   },
   "test": {

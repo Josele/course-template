@@ -84,8 +84,8 @@
     },
   },
   "include": [
-    "src/db/*.ts",
-//    "spec/**/*.ts"
+//   "src/db/*.ts",
+    "spec/**/*.ts"
   ],
   "exclude": [
     "src/public/"

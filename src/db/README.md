@@ -1,4 +1,4 @@
-## STRUCTURE
+## DIR STRUCTURE
 .
 ├── README.md
 ├── migrate
@@ -14,6 +14,8 @@
 │   ├── 20220202135006-demo-user.js
 │   └── 20220202135024-demo-course.js
 └── tests
+    ├── association_tests.ts
+    ├── course_tests.ts
     ├── main.ts
     └── user_tests.ts
 

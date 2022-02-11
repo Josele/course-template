@@ -1,22 +1,14 @@
-import { CourseSeason, ICourse } from '@entities/Course';
+import { ICourseDao } from '@entities/Course';
 
 import {
     Sequelize,
     DataTypes,
-    Model
 } from 'sequelize';
 
-export interface CourseModel extends Model{
-    id: number;
-    name: string;
-    year: number;
-    season: CourseSeason;
-    createdAt: string;
-    updatedAt: string;
-}
-
-export function course(sequelize: Sequelize, dataTypes: typeof DataTypes) {
-    return sequelize.define<CourseModel>('Courses', {
+// Defines the Courses Table DB. It has taken the ICourseDao as model,
+// which extends sequelize model
+export function courseModel(sequelize: Sequelize, dataTypes: typeof DataTypes) {
+    return sequelize.define<ICourseDao>('Courses', {
             id: {
                 type: dataTypes.INTEGER,
                 allowNull: false,
@@ -29,7 +21,7 @@ export function course(sequelize: Sequelize, dataTypes: typeof DataTypes) {
                     notEmpty: {msg: 'Missing course name'},
                 },
             },
-            sesson: {
+            season: {
                 type: dataTypes.NUMBER,
                 allowNull: false,
                 

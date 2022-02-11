@@ -11,7 +11,7 @@ module.exports = {
       name: {
         type: DataTypes.STRING
       },
-      sesson: {
+      season: {
         type: DataTypes.NUMBER
       },
       year: {
