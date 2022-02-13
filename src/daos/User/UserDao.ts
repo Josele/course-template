@@ -1,4 +1,4 @@
-import { IUser, IUserDao } from '@entities/User';
+import { IUser, IUserDao, IUserDaoAttributes } from '@entities/User';
 import { userDB } from "@models/index";
 
 /**
@@ -54,10 +54,18 @@ export async function getById(id: number): Promise< IUserDao | null> {
  *
  * @param user
  */
-export async function update( id: number, user: IUserDao | IUser): Promise<void> {
+export async function update(user: IUserDao | IUser | IUserDaoAttributes, id?:number ): Promise<void> {
+    let userId:number;
+    
+    if (id)
+        userId=id;
+    else if ("id" in user)
+        userId=user.id;
+    else
+        throw new Error('Missing user id');
     let userEntry  = await userDB.findOne({
         where: {
-            id: id,
+            id:  userId,
         }
     });
     if (userEntry===null)throw new Error('User not found');

@@ -96,7 +96,7 @@ export const  updateUser= async (rl: any) => {
         role: role,
         pwdHash: await bcrypt.hash(name, salt),
     }
-    await UserDao.update(id,newUser); 
+    await UserDao.update(newUser,id); 
 }
 
 

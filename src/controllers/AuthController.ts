@@ -2,11 +2,11 @@ import bcrypt from 'bcrypt';
 import { Request, Response, Router } from 'express';
 import StatusCodes from 'http-status-codes';
 
-import UserDao from '@daos/User/UserDao.mock';
+import * as UserDao from '@daos/User/UserDao';
+import { IUserDaoAttributes } from '@entities/User';
 import { JwtService } from '@shared/JwtService';
 import { paramMissingError, loginFailedErr, cookieProps } from '@shared/constants';
 
-const userDao = new UserDao();
 const jwtService = new JwtService();
 const { BAD_REQUEST, OK, UNAUTHORIZED } = StatusCodes;
 
@@ -28,7 +28,7 @@ class AuthController {
 			});
 		}
 		// Fetch user
-		const user = await userDao.getOne(email);
+		const user = await UserDao.getByEmail(email) as IUserDaoAttributes;
 		if (!user) {
 			return res.status(UNAUTHORIZED).json({
 				error: loginFailedErr,
