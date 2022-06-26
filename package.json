@@ -88,7 +88,7 @@
     "randomstring": "^1.2.1",
     "sequelize": "^6.7.0",
     "sequelize-cli": "^6.4.1",
-    "sqlite3": "^5.0.2"
+    "sqlite3": "^5.0.8"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
