@@ -1,10 +1,10 @@
 import StatusCodes from 'http-status-codes';
 import { Request, Response } from 'express';
 
-import UserDao from '@daos/User/UserDao.mock';
+import * as UserDao from '@daos/User/UserDao';
+import { IUser } from '@entities/User';
 import { paramMissingError } from '@shared/constants';
 
-const userDao = new UserDao();
 const { BAD_REQUEST, CREATED, OK } = StatusCodes;
 
 
@@ -18,7 +18,7 @@ class ProfileController{
 	 */
 	static  getUser = async(req: Request, res: Response) => {
 		const { id } = req.params;
-		const user = await userDao.getOneById(Number(id));
+		const user = await UserDao.getById(Number(id)) as IUser;
 		return res.status(OK).json({user});
 	}
 

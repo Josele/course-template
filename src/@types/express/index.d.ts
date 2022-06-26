@@ -5,7 +5,7 @@ import { IClientData } from '@shared/JwtService';
 declare module 'express' {
     export interface Request  {
         body: {
-            user: IUser
+            user: IUserDaoAttributes;
             email: string;
             password: string;
         };

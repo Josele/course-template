@@ -27,10 +27,14 @@ export const checkJwt = async (req: Request, res: Response, next: NextFunction) 
 			} else {
             throw Error('JWT not present in signed cookie.');
         }
-    } catch (err) {
-        return res.status(UNAUTHORIZED).json({
-            error: err.message,
-        });
+    } catch (err: unknown) {
+        if (err instanceof Error) {
+            return res.status(UNAUTHORIZED).json({
+                error: err.message,
+            });
+        }else{
+            return res.status(500);
+        }
     }
 };
 
